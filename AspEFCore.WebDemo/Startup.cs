@@ -32,9 +32,9 @@ namespace AspEFCore.WebDemo
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<MyContext>(options =>
+            services.AddDbContext<MyContext>(options => //Scope
             {
-                options.EnableSensitiveDataLogging(true);
+                options.EnableSensitiveDataLogging(true);//记录敏感数据
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
         }

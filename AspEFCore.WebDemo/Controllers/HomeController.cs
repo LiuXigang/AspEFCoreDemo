@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using AspEFCore.WebDemo.Models;
 using AspEFCore.Domain;
 using AspEFCore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspEFCore.WebDemo.Controllers
 {
@@ -20,17 +21,17 @@ namespace AspEFCore.WebDemo.Controllers
         }
         public IActionResult Index()
         {
-            var province = new Province
-            {
-                Name = "天津",
-                Population = 1_000_000
-            };
-            var company = new Company
-            {
-                Name = "泰达",
-                EstablishData = new DateTime(1995, 12, 22),
-                LegalPerson = "Secret Man"
-            };
+            //var province = new Province
+            //{
+            //    Name = "天津",
+            //    Population = 1_000_000
+            //};
+            //var company = new Company
+            //{
+            //    Name = "泰达",
+            //    EstablishData = new DateTime(1995, 12, 22),
+            //    LegalPerson = "Secret Man"
+            //};
             //var province1 = new Province
             //{
             //    Name = "上海",
@@ -44,8 +45,14 @@ namespace AspEFCore.WebDemo.Controllers
             //_context.Add(province);
             //var listProvinces = new List<Province> { province, province1, province2 };
             //_context.AddRange(listProvinces);
-            _context.AddRange(province, company);
-            _context.SaveChanges();
+            //_context.AddRange(province, company);
+            //_context.SaveChanges();
+            var data = _context.Province.Where(n => EF.Functions.Like(n.Name, "%北京%")).FirstOrDefault();
+            if (data != null)
+            {
+                data.Population += 1000;
+                _context.SaveChanges();
+            }
 
             return View();
         }
