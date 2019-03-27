@@ -34,6 +34,7 @@ namespace AspEFCore.WebDemo
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<MyContext>(options =>
             {
+                options.EnableSensitiveDataLogging(true);
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
         }
