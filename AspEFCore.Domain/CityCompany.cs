@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AspEFCore.Domain
+﻿namespace AspEFCore.Domain
 {
     public class CityCompany
     {

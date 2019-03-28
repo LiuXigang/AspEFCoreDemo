@@ -13,11 +13,11 @@ namespace AspEFCore.WebDemo.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly MyContext _context;
+        public readonly MyContext Context;
 
         public HomeController(MyContext context)
         {
-            _context = context;
+            Context = context;
         }
         public IActionResult Index()
         {
@@ -47,11 +47,11 @@ namespace AspEFCore.WebDemo.Controllers
             //_context.AddRange(listProvinces);
             //_context.AddRange(province, company);
             //_context.SaveChanges();
-            var data = _context.Province.Where(n => EF.Functions.Like(n.Name, "%北京%")).FirstOrDefault();
+            var data = Context.Province.FirstOrDefault(n => EF.Functions.Like(n.Name, "%北京%"));
             if (data != null)
             {
                 data.Population += 1000;
-                _context.SaveChanges();
+                Context.SaveChanges();
             }
 
             return View();
